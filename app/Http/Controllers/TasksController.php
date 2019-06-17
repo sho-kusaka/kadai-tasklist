@@ -29,17 +29,10 @@ class TasksController extends Controller
      */
     public function create()
     {
-        $this->validate($task, [
-             'status' => 'required|max:10',
-            'content' => 'required|max:191',
-        ]);
-        
         $task = new Task;
-        $task->status = $request->status; 
 
         return view('tasks.create', [
             'task' => $task,
-             $task->status= $request->status,
         ]);
     }
 
@@ -51,7 +44,13 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+             'status' => 'required|max:10',
+            'content' => 'required|max:191',
+        ]);
+        
         $task = new Task;
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
 
@@ -81,17 +80,10 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        $this->validate($id, [
-             'status' => 'required|max:10',
-            'content' => 'required|max:191',
-        ]);
-        
-         $task = Task::find($id);
-         $task->status = $request->status;
-
+        $task = Task::find($id);
+         
         return view('tasks.edit', [
             'task' => $task,
-            $task->status= $request->status,
         ]);
     }
 
@@ -104,8 +96,13 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-         
+           $this->validate($request, [
+             'status' => 'required|max:10',
+            'content' => 'required|max:191',
+        ]);
+        
         $task = Task::find($id);
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
 
