@@ -4,8 +4,6 @@
 
 Route::get('/', 'TasksController@index');
 
-Route::resource('tasks', 'TasksController');Route::resource('tasks', 'TasksController');
-
 // ログイン認証
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
@@ -17,9 +15,5 @@ Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 
 // ユーザ機能
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
-});
-
-Route::get('/', function () {
-    return view('welcome');
+    Route::resource('tasks', 'TasksController');
 });
