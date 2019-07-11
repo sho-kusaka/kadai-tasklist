@@ -1,6 +1,10 @@
 <header class="mb-4">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark"> 
+        @if (Auth::check())
+        <a class="navbar-brand" href="/">TaskLists</a>
+        @else
         <a class="navbar-brand" href="/">Microposts</a>
+        @endif
         
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
             <span class="navbar-toggler-icon"></span>
