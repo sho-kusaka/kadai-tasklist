@@ -106,12 +106,10 @@ class TasksController extends Controller
             'content' => 'required|max:191',
         ]);
         
-        if (\Auth::id() === $task->user_id) {
-            $task->update([
-                'content' =>' $request->content',
-                'status' =>' $request->status',
-                ]);
-        }
+        $request->user()->tasks()->edit([
+            'content' => $request->content,
+            'status' =>$request->status,
+        ]);
         
         return redirect('/');
     }
